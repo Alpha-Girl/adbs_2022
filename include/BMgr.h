@@ -1,5 +1,11 @@
 #pragma once
+#ifndef BMGR_H
+#define BMGR_H
+
+#include <iostream>
+
 #include "setting.h"
+#include "DSMgr.h"
 class BMgr
 {
 public:
@@ -24,3 +30,4 @@ private:
     int ftop[DEFBUFSIZE];
     BCB *ptof[DEFBUFSIZE];
 };
+#endif
