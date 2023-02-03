@@ -1,5 +1,5 @@
 
-INCLUDE = -I../src
+INCLUDE = -I../include
 LIB = -L../src -lBMgr
 CXXFLAGS = $(INCLUDE) $(LIB)
 

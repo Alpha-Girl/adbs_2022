@@ -1,5 +1,5 @@
-#include "ReplaceAlgorithm.h"
-#include "setting.h"
+#include "../include/ReplaceAlgorithm.h"
+#include "../include/setting.h"
 
 //global variable
 int Clock_current;

@@ -3,7 +3,7 @@
 #define SETTINGS_H
 
 #define FRAMESIZE 4096
-
+#define MAXPAGES 4096
 typedef struct bFrame
 {
     char field[FRAMESIZE];

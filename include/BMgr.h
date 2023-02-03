@@ -22,13 +22,6 @@ public:
 
 // Internal Functions
     BCB *SelectVictim();                //根据替换算法选择一个替换帧，BCB中包含需要的frame_id
-    // int Hash(int page_id);
-    // void RemoveBCB(BCB *ptr, int page_id);
-    // void RemoveLRUEle(int frid);
-    // void SetDirty(int frame_id);
-    // void UnsetDirty(int frame_id);
-    // void WriteDirtys();
-    // PrintFrame(int frame_id);
     
 // My internal
     void clear_buffer();                //将bufer中为dirty的frame全部写回磁盘
@@ -62,28 +55,5 @@ public:
     int write;              //读写中，写的次数
     int read_io, write_io;  //磁盘io次数（如读不命中，写dirty替换）
 };
-// class BMgr
-// {
-// public:
-//     BMgr();
-//     // Interface functions
-//     int FixPage(int page_id, int prot);
-//     void NewPage FixNewPage();
-//     int UnfixPage(int page_id);
-//     int NumFreeFrames();
-//     // Internal Functions
-//     int SelectVictim();
-//     int Hash(int page_id);
-//     void RemoveBCB(BCB *ptr, int page_id);
-//     void RemoveLRUEle(int frid);
-//     void SetDirty(int frame_id);
-//     void UnsetDirty(int frame_id);
-//     void WriteDirtys();
-//     PrintFrame(int frame_id);
 
-// private:
-//     // Hash Table
-//     int ftop[DEFBUFSIZE];
-//     BCB *ptof[DEFBUFSIZE];
-// };
 #endif

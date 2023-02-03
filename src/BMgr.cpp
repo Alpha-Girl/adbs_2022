@@ -1,4 +1,4 @@
-#include "BMgr.h"
+#include "../include/BMgr.h"
 #include <string.h>
 
 bFrame buf[DEFBUFSIZE];     //store the frames
@@ -43,6 +43,13 @@ BMgr::~BMgr(){
     clear_buffer();
 }
 
+/*
+The prototype for this function is FixPage(Page_id, protection) and it returns a frame_id.
+The file and access manager will call this page with the page_id that is in the record_id of
+the record. The function looks to see if the page is in the buffer already and returns the
+corresponding frame_id if it is. If the page is not resident in the buffer yet, it selects a
+victim page, if needed, and loads in the requested page.
+*/
 int BMgr::FixPage(int page_id, int type){
     access_total++; //statistic
 
@@ -98,6 +105,13 @@ int BMgr::FixPage(int page_id, int type){
     return bcb_ptr->frame_id;
 }
 
+/*
+The prototype for this function is FixNewPage() and it returns a page_id and a frame_id.
+This function is used when a new page is needed on an insert, index split, or object
+creation. The page_id is returned in order to assign to the record_id and metadata. This
+function will find an empty page that the File and Access Manager can use to store some
+data.
+*/
 int BMgr::FixNewPage(int *page_id_ptr){
     BCB *bcb_ptr = SelectVictim();
     int page_id = dsmgr->NewPage();
@@ -110,6 +124,15 @@ int BMgr::FixNewPage(int *page_id_ptr){
     return bcb_ptr->frame_id;
 }
 
+
+/*
+The prototype for this function is UnfixPage(page_id) and it returns a frame_id. This
+function is the compliment to a FixPage or FixNewPage call. This function decrements
+the fix count on the frame. If the count reduces to zero, then the latch on the page is
+removed and the frame can be removed if selected. The page_id is translated to a
+frame_id and it may be unlatched so that it can be chosen as a victim page if the count on
+the page has been reduced to zero.
+*/
 int BMgr::UnfixPage(int page_id) {
     BCB * bcb_ptr = hash_search(page_id);
     if(bcb_ptr==NULL){
@@ -125,14 +148,13 @@ int BMgr::UnfixPage(int page_id) {
     return bcb_ptr->frame_id;
 }
 
+
+/*
+NumFreeFrames function looks at the buffer and returns the number of buffer pages
+that are free and able to be used. This is especially useful for the N-way sort for the
+query processor. The prototype for the function looks like NumFreeFrames() and returns
+an integer from 0 to BUFFERSIZE-1(1023)*/
 int BMgr::NumFreeFrames() {
-    // BCB * ptr = free_list;
-    // int cnt = 0;
-    // while(ptr!=NULL){
-    //     cnt ++;
-    //     ptr = ptr->free_next;
-    // }
-    // return cnt;
     return free_frame_num;
 }
 
@@ -148,6 +170,11 @@ void BMgr::clear_buffer(){
     }
 }
 
+
+/*
+SelectVictim function selects a frame to replace. If the dirty bit of the selected frame is
+set then the page needs to be written on to the disk.
+*/
 BCB *BMgr::SelectVictim(){
     //free frame?
     BCB *bcb_ptr;

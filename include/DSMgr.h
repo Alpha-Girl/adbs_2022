@@ -21,32 +21,15 @@ public:
     void WritePage(int page_id, bFrame *frm);       //将frame写入到文件中page_id对应的页
     void IncNumPages();         //页计数器加1
     int GetNumPages();          //获得页计数器
-    void SetUse(int index, int use_bit);
-    int GetUse(int index);
+    void SetUse(int page_id, int use_bit);
+    int GetUse(int page_id);
 
     int NewPage();
 
 private:
-    FILE *curr_file;
-    int num_pages;
+    FILE *currFile;
+    int numPages;
+    int pages[MAXPAGES];
 };
-// class DSMgr
-// {
-//     public:
-//         DSMgr();
-//         int OpenFile(string filename);
-//         int CloseFile();
-//         bFrame ReadPage(int page_id);
-//         int WritePage(int frame_id,bFrame frm);
-//         int Seek(int offset, int pos);
-//         FILE *GetFile();
-//         void IncNumPages();
-//         int GetNumPages();
-//         void SetUse(int index, int use_bit);
-//         int GetUse(int index);
-//     private:
-//         FILE *currFile;
-//         int numPages;
-//         // int pages[MAXPAGES];
-// };
+
 #endif

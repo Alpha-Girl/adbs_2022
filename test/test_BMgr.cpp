@@ -1,4 +1,4 @@
-#include "../src/BMgr.h"
+#include "BMgr.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -47,7 +47,6 @@ int main(int argc, char *argv[]){
     fseek(fp, 0, SEEK_SET);
     while((fscanf(fp, "%d,%d", &type, &page_id))==2){
         bmgr->FixPage(page_id, type);   //访问页
-        // printf("cnt: %d\n", cnt++);
     }
     t += clock();
     bmgr->print_statistical_data();
