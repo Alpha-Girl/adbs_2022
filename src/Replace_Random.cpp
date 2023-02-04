@@ -2,18 +2,21 @@
 #include "../include/setting.h"
 #include <stdlib.h>
 
-static void init(){
-    srand(2021);
+static void init()
+{
+    srand(2023);
 }
 
-static void update(BCB *bcb_ptr, int is_free_frame){
+static void update(BCB *bcb_ptr, int is_free_frame)
+{
     ;
 }
 
-static BCB *select_victim(){
-    BCB * bcb_ptr;
+static BCB *select_victim()
+{
+    BCB *bcb_ptr;
     // bcb_ptr = &buf_bcb[0];
-    bcb_ptr = &buf_bcb[rand()%DEFBUFSIZE];
+    bcb_ptr = &buf_bcb[rand() % DEFBUFSIZE];
     return bcb_ptr;
 }
 

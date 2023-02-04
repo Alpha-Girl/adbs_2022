@@ -16,7 +16,7 @@ extern bFrame buf[DEFBUFSIZE]; // or the size that the user defined by the input
 // Buffer Control Block
 typedef struct BCB
 {
-    // BCB();
+    BCB();
     int page_id;
     int frame_id;
     int latch;
@@ -34,5 +34,18 @@ typedef struct BCB
 
 } BCB;
 
+BCB::BCB()
+{
+    page_id = -1;
+    frame_id = -1;
+    latch = 0;
+    count = 0;
+    dirty = 0;
+
+    next = NULL;
+    free_next = NULL;
+    LRU_prev = NULL;
+    LRU_next = NULL;
+}
 extern BCB buf_bcb[DEFBUFSIZE];
 #endif
