@@ -390,8 +390,10 @@ void BMgr::init_statistical_data()
 */
 void BMgr::print_statistical_data()
 {
-    printf("total: %d\n", access_total);
-    printf("hit rate: %.3f%%\n", (float)hit / access_total * 100);
+    printf("Total: %d\n", access_total);
+    printf("Total hit: %d\n", hit);
+    printf("Hit rate: %.3f%%\n", (float)hit / access_total * 100);
+    printf("Total write: %d\n", write);
     printf("write rate: %.3f%%\n", (float)write / access_total * 100);
     printf("read_io: %d\n", read_io);
     printf("write_io: %d\n", write_io);

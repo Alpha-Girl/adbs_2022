@@ -16,7 +16,6 @@ int main(int argc, char *argv[])
     cmd.parse_check(argc, argv);
 
     std::string trace_file = cmd.get<std::string>("tracefile");
-    // const char *trace_file = "../data-5-12-for-4-LRU.txt";
     FILE *fp;
     if (!(fp = fopen(trace_file.c_str(), "r")))
     {

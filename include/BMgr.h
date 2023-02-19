@@ -14,13 +14,13 @@ public:
     BMgr(std::string filename, int alg); // alg选择替换算法
     ~BMgr();
 
-    // Interface functions
+    // 接口函数
     int FixPage(int page_id, int type); // type: 0 read, 1 write
     int FixNewPage(int *page_id_ptr);   // 调用DSMgr创建一个新的页，返回frame_id，和page_id(通过指针返回)
     int UnfixPage(int page_id);
     int NumFreeFrames(); // 获得空闲frame的数量
 
-    // Internal Functions
+    // 内部函数
     BCB *SelectVictim(); // 根据替换算法选择一个替换帧，BCB中包含需要的frame_id
     int Hash(int page_id);
     void SetDirty(int frame_id);
@@ -47,14 +47,13 @@ public:
     void init_statistical_data();
     void print_statistical_data();
 
-
-    // statistic data
+    // 统计信息
     int access_total;      // 读写的总次数
     int hit;               // 读写buffer命中次数
     int write;             // 读写中，写的次数
     int read_io, write_io; // 磁盘io次数（如读不命中，写dirty替换）
 private:
-    // Hash Table
+    // 哈希表
     int ftop[DEFBUFSIZE];
     BCB *ptof[DEFBUFSIZE];
     BCB *free_list;
